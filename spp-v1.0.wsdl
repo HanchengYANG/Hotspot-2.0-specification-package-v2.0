@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+	Hotspot 2.0 Subscription Provisioning Protocol WSDL
+	
+	This document is the Web Service Description Language (WSDL) for Subscription Provisioning Protocol, part of the Wi-Fi Alliance Wi-Fi 
+	CERTIFIED Passpoint(tm) program, a solution for next generation Wi-Fi(R) hotspots. 
+	
+	WI-FI ALLIANCE PROPRIETARY - SUBJECT TO CHANGE WITHOUT NOTICE
+	
+	This document may be used with the permission of Wi-Fi Alliance under the terms set forth herein.  
+	
+	By your use of the document, you are agreeing to these terms. 
+	
+	Unless this document is clearly designated as an approved specification, this document is a work in process and is not an approved Wi-Fi Alliance specification. 
+	
+	This document is subject to revision or removal at any time without notice.  
+	Information contained in this document may be used at your sole risk.  
+	Wi-Fi Alliance assumes no responsibility for errors or omissions in this document.
+	
+	This copyright permission does not constitute an endorsement of the products or services.  
+	Wi-Fi Alliance trademarks and certification marks may not be used unless specifically allowed by Wi-Fi Alliance.
+	
+	Wi-Fi Alliance has not conducted an independent intellectual property rights ("IPR") review of this document and the information contained herein, 
+	and makes no representations or warranties regarding IPR, including without limitation patents, copyrights or trade secret rights. 
+	This document may contain inventions for which you must obtain licenses from third parties before making, using or selling the inventions. 
+	
+	Wi-Fi Alliance owns the copyright in this document and reserves all rights therein.  
+	A user of this document may duplicate and distribute copies of the document in connection with the authorized uses described herein, 
+	provided any duplication in whole or in part includes the copyright notice and the disclaimer text set forth herein.  
+	Wi-Fi Alliance hereby grants a user of the XML schema file(s) of this document a royalty-free, perpetual, 
+	irrevocable copyright license to use and distribute solely the XML schema file(s) found within this document. 
+	
+	Unless prior written permission has been received from Wi-Fi Alliance, any other use of this document and all other duplication and distribution of this document are prohibited.  
+	Unauthorized use, duplication, or distribution is an infringement of Wi-Fi Alliance's copyright.
+	
+	NO REPRESENTATIONS OR WARRANTIES (WHETHER EXPRESS OR IMPLIED) ARE MADE BY WI-FI ALLIANCE AND WI-FI ALLIANCE IS NOT LIABLE FOR AND HEREBY DISCLAIMS 
+	ANY DIRECT, INDIRECT, PUNITIVE, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING OUT OF OR IN CONNECTION WITH THE USE OF THIS DOCUMENT AND ANY INFORMATION CONTAINED IN THIS DOCUMENT.
+	
+	(C) 2014 Wi-Fi Alliance.  All Rights Reserved.
+	
+		Revision History
+		Revision	Date				Comments
+		1.0			April 29, 2014		Release version 1.0 based on Hotspot 2.0 Release 2 Specification, v1.0 and Test Plan, v1.0
+											
+-->
+
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:spp="http://www.wi-fi.org/specifications/hotspot2dot0/v1.0/spp"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:tns="http://www.wi-fi.org/specifications/hotspot2dot0/v1.0/spp/definitions"
+	targetNamespace="http://www.wi-fi.org/specifications/hotspot2dot0/v1.0/spp/definitions">
+
+	<!-- types - provides data type definitions used to describe the messages exchanged. -->
+	<wsdl:types>
+		<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<xsd:import namespace="http://www.wi-fi.org/specifications/hotspot2dot0/v1.0/spp"
+						schemaLocation="http://www.wi-fi.org/specifications/hotspot2dot0/v1.0/spp"/>
+		</xsd:schema>
+	</wsdl:types>
+
+	<!-- messages - represents an abstract definition of the data being transmitted. A message consists of logical parts, each of which is associated with a definition within some type system. -->
+	<wsdl:message name="sppPostDevData">
+		<wsdl:part element="spp:sppPostDevData" name="sppPostDevData"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="sppPostDevDataResponse">
+		<wsdl:part element="spp:sppPostDevDataResponse" name="sppPostDevDataResponse"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="sppUpdateResponse">
+		<wsdl:part element="spp:sppUpdateResponse" name="sppUpdateResponse"> </wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="sppExchangeComplete">
+		<wsdl:part element="spp:sppExchangeComplete" name="sppExchangeComplete"> </wsdl:part>
+	</wsdl:message>
+
+	<!-- portType - is a set of abstract operations. Each operation refers to an input message and output messages. -->
+	<wsdl:portType name="OnlineSignup">
+		<wsdl:operation name="sppPostDevData">
+			<wsdl:input message="tns:sppPostDevData" name="sppPostDevData"> </wsdl:input>
+			<wsdl:output message="tns:sppPostDevDataResponse" name="sppPostDevDataResponse"
+			> </wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sppUpdateWithExchangeComplete">
+			<wsdl:input message="tns:sppUpdateResponse" name="sppUpdateResponse"> </wsdl:input>
+			<wsdl:output message="tns:sppExchangeComplete" name="sppExchangeComplete"
+			> </wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+
+	<!-- binding - specifies concrete protocol and data format specifications for the operations and messages defined by a particular portType. -->
+	<wsdl:binding name="OnlineSignupSoap12" type="tns:OnlineSignup">
+		<soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="sppPostDevData">
+			<soap12:operation soapAction=""/>
+			<wsdl:input name="sppPostDevData">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="sppPostDevDataResponse">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="sppUpdateWithExchangeComplete">
+			<soap12:operation soapAction=""/>
+			<wsdl:input name="sppUpdateResponse">
+				<soap12:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="sppExchangeComplete">
+				<soap12:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+
+	<!-- service - is used to aggregate a set of related ports. -->
+	<wsdl:service name="OnlineSignupService">
+
+		<!-- port - specifies an address for a binding, thus defining a single communication endpoint. -->
+		<wsdl:port binding="tns:OnlineSignupSoap12" name="OnlineSignupSoap12">
+			<soap12:address location="https://osu-server.wi-fi.org"/>
+			<!-- change to the OSU server's URL -->
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

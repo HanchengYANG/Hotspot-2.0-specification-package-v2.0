@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+	Hotspot 2.0 PerProviderSubscription, version 1.0 
+	
+	urn:wfa:mo:hotspot2dot0-PerProviderSubscription:1.0
+	
+	This DDF contains a description of the Per Provider Subscription management object (PerProviderSubscription), 
+	according to the OMA DM Description Framework.  This document is part of the Wi-Fi Alliance Wi-Fi CERTIFIED Passpoint(tm) program, 
+	a solution for next generation Wi-Fi(R) hotspots. 
+	
+	WI-FI ALLIANCE PROPRIETARY - SUBJECT TO CHANGE WITHOUT NOTICE
+	
+	This document may be used with the permission of Wi-Fi Alliance under the terms set forth herein.  
+	
+	By your use of the document, you are agreeing to these terms. 
+	
+	Unless this document is clearly designated as an approved specification, this document is a work in process and is not an approved Wi-Fi Alliance specification. 
+	
+	This document is subject to revision or removal at any time without notice.  
+	Information contained in this document may be used at your sole risk.  
+	Wi-Fi Alliance assumes no responsibility for errors or omissions in this document.
+	
+	This copyright permission does not constitute an endorsement of the products or services.  
+	Wi-Fi Alliance trademarks and certification marks may not be used unless specifically allowed by Wi-Fi Alliance.
+	
+	Wi-Fi Alliance has not conducted an independent intellectual property rights ("IPR") review of this document and the information contained herein, 
+	and makes no representations or warranties regarding IPR, including without limitation patents, copyrights or trade secret rights. 
+	This document may contain inventions for which you must obtain licenses from third parties before making, using or selling the inventions. 
+	
+	Wi-Fi Alliance owns the copyright in this document and reserves all rights therein.  
+	A user of this document may duplicate and distribute copies of the document in connection with the authorized uses described herein, 
+	provided any duplication in whole or in part includes the copyright notice and the disclaimer text set forth herein.  
+	Wi-Fi Alliance hereby grants a user of the XML schema file(s) of this document a royalty-free, perpetual, 
+	irrevocable copyright license to use and distribute solely the XML schema file(s) found within this document. 
+	
+	Unless prior written permission has been received from Wi-Fi Alliance, any other use of this document and all other duplication and distribution of this document are prohibited.  
+	Unauthorized use, duplication, or distribution is an infringement of Wi-Fi Alliance's copyright.
+	
+	NO REPRESENTATIONS OR WARRANTIES (WHETHER EXPRESS OR IMPLIED) ARE MADE BY WI-FI ALLIANCE AND WI-FI ALLIANCE IS NOT LIABLE FOR AND HEREBY DISCLAIMS 
+	ANY DIRECT, INDIRECT, PUNITIVE, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING OUT OF OR IN CONNECTION WITH THE USE OF THIS DOCUMENT AND ANY INFORMATION CONTAINED IN THIS DOCUMENT.
+	
+	(C) 2014 Wi-Fi Alliance.  All Rights Reserved.
+	
+		Revision History
+		Revision	Date				Comments
+		1.0			April 29, 2014		Release version 1.0 based on Hotspot 2.0 Release 2 Specification, v1.0 and Test Plan, v1.0
+											
+-->
+
+<!DOCTYPE MgmtTree PUBLIC "-//OMA//DTD-DM-DDF 1.2//EN" "http://www.openmobilealliance.org/tech/DTD/DM_DDF-V1_2.dtd"
+             [<?oma-dm-ddf-ver supported-versions="1.2"?>]>
+
+<MgmtTree>
+	<VerDTD>1.2</VerDTD>
+	<Node>
+		<NodeName>PerProviderSubscription</NodeName>
+		<!-- Status: Required -->
+		<DFProperties>
+			<AccessType><Get/></AccessType>
+			<DFFormat><node/></DFFormat>
+			<DFType><DDFName></DDFName></DFType>
+		</DFProperties>
+		
+		<Node>
+			<NodeName>UpdateIdentifier</NodeName>
+			<!-- Status: Required -->
+			<DFProperties>
+				<AccessType><Get/><Replace/></AccessType>
+				<DFFormat><int/></DFFormat>
+				<DFType><MIME>text/plain</MIME></DFType>
+			</DFProperties>
+		</Node>
+		
+		<!-- This is the dynamic node to facilitate more than 1 credential for a given provider -->
+		<Node>
+			<NodeName></NodeName>
+			<!-- Status: Required -->
+			<DFProperties>
+				<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+				<DFFormat><node/></DFFormat>
+				<DFType><DDFName></DDFName></DFType>
+			</DFProperties>
+			
+			<!-- ***** Policy Node ***** -->
+			<Node>
+				<NodeName>Policy</NodeName>
+				<!-- Status: Required -->
+				<DFProperties>
+					<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+					<DFFormat><node/></DFFormat>
+					<Occurrence><ZeroOrOne/></Occurrence>
+					<DFType><DDFName></DDFName></DFType>
+				</DFProperties>
+					
+				<!-- Policy: PreferredRoamingPartnerList node -->
+				<Node>				
+					<NodeName>PreferredRoamingPartnerList</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					<Node>
+						<NodeName></NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><OneOrMore/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>FQDN_match</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>Priority</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>Country</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+					</Node><!-- end of dynamic container node for a roaming partner tuple -->
+				</Node><!-- end of PreferredRoamingPartnerList node -->
+				
+				<!-- Policy: MinBackhaulThreshold child node -->	
+				<Node>
+					<NodeName>MinBackhaulThreshold</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					<Node>
+						<NodeName></NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><OneOrMore/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>NetworkType</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>DLBandwidth</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>ULBandwidth</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+					</Node><!-- end of dynamic container node for a MinBackhaulThreshold tuple -->
+				</Node><!-- end of MinBackhaulThreshold node -->
+				
+				<!-- Policy: PolicyUpdate child node -->	
+				<Node>
+					<NodeName>PolicyUpdate</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName>UpdateInterval</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><int/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>UpdateMethod</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>Restriction</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>URI</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>UsernamePassword</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><ZeroOrOne/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>Username</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>Password</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Replace/></AccessType>
+								<DFFormat><b64/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+					</Node><!-- End of the UsernamePassword child node -->
+										
+					<Node>
+						<NodeName>Other</NodeName>
+						<!-- Status: Optional -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><ZeroOrMore/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+					</Node>
+
+					<Node>
+						<NodeName>TrustRoot</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>CertURL</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>CertSHA256Fingerprint</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+					</Node><!-- End of the Trust Root child node -->
+				</Node><!-- End of the PolicyUpdate node -->
+	
+				<!-- Policy: SPExclusionList child node -->	
+				<Node>
+					<NodeName>SPExclusionList</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName></NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><OneOrMore/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>SSID</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+					</Node>
+				</Node><!-- End of SPExclusionList node -->
+				
+				<!-- Policy: PreferredConnectionCapability child node -->
+				<Node>
+					<NodeName>PreferredConnectionCapability</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName></NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><OneOrMore/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>IPProtocol</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>PortNumber</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+					</Node><!-- End of dynamic node for ProtoPort tuples -->
+				</Node><!-- End of PreferredConnectionCapability node -->
+				
+				<!-- Policy: MaximumBSSLoadValue child node -->
+				<Node>
+					<NodeName>MaximumBSSLoadValue</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><int/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+					
+				</Node><!-- End of MaximumBSSLoadValue node -->
+			</Node><!-- End of the Policy node -->
+			
+			<Node>
+				<NodeName>CredentialPriority</NodeName>
+				<!-- Status: Required -->
+				<DFProperties>
+					<AccessType><Get/><Replace/></AccessType>
+					<DFFormat><int/></DFFormat>
+					<DFType><MIME>text/plain</MIME></DFType>
+				</DFProperties>
+			</Node>
+			
+			
+			<!-- ***** AAA Server Trust Node ***** -->
+			<Node>
+				<NodeName>AAAServerTrustRoot</NodeName>
+				<!-- Status: Required -->
+				<DFProperties>
+					<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+					<DFFormat><node/></DFFormat>
+					<Occurrence><ZeroOrOne/></Occurrence>
+					<DFType><DDFName></DDFName></DFType>
+				</DFProperties>
+				
+				<Node>
+					<NodeName></NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><OneOrMore/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName>CertURL</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>CertSHA256Fingerprint</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+				</Node><!-- End of dynamic container node for AAAServerTrustRoot information -->
+			</Node><!-- End of AAAServerTrustRoot node -->
+			
+			
+			<!-- ***** SubscriptionUpdate ***** node -->	
+			<Node>
+				<NodeName>SubscriptionUpdate</NodeName>
+				<!-- Status: Required -->
+				<DFProperties>
+					<AccessType><Get/><Replace/></AccessType>
+					<DFFormat><node/></DFFormat>
+					<DFType><DDFName></DDFName></DFType>
+				</DFProperties>
+				
+				<Node>
+					<NodeName>UpdateInterval</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><int/></DFFormat>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>UpdateMethod</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>Restriction</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>URI</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>UsernamePassword</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName>Username</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>Password</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Replace/></AccessType>
+							<DFFormat><b64/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+				</Node><!-- End of the UsernamePassword child node -->
+				
+				<Node>
+					<NodeName>Other</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrMore/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>TrustRoot</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName>CertURL</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>CertSHA256Fingerprint</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+				</Node><!-- End of the Trust Root child node -->				
+			</Node><!-- End of the SubscriptionUpdate node -->
+			
+			<!-- ***** HomeSP ***** node -->	
+			<Node>
+				<NodeName>HomeSP</NodeName>
+				<!-- Status: Required -->
+				<DFProperties>
+					<AccessType><Get/><Replace/></AccessType>
+					<DFFormat><node/></DFFormat>
+					<DFType><DDFName></DDFName></DFType>
+				</DFProperties>
+				
+				<Node>
+					<NodeName>NetworkID</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName></NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><OneOrMore/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>SSID</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>HESSID</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+					</Node><!-- End of dynamic container node for NetworkID duple -->
+				</Node><!-- End of NetworkID node -->
+				
+				<Node>
+					<NodeName>FriendlyName</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>IconURL</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>FQDN</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>HomeOIList</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName></NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><OneOrMore/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>HomeOI</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>HomeOIRequired</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><bool/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+					</Node><!-- End of dynamic container node for HomeOILIst duple -->
+				</Node><!-- End of HomeOILIst node -->
+				
+				<Node>
+					<NodeName>OtherHomePartners</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName></NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<Occurrence><OneOrMore/></Occurrence>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>FQDN</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+					</Node><!-- End of dynamic container node for OtherHomePartners -->
+				</Node><!-- End of OtherHomePartners node -->
+				
+				<Node>
+					<NodeName>RoamingConsortiumOI</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+			</Node><!-- End of HomeSP node -->	
+			
+			<!-- ***** SubscriptionParameters ***** node -->	
+			<Node>
+				<NodeName>SubscriptionParameters</NodeName>
+				<!-- Status: Optional -->
+				<DFProperties>
+					<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+					<DFFormat><node/></DFFormat>
+					<Occurrence><ZeroOrOne/></Occurrence>
+					<DFType><DDFName></DDFName></DFType>
+				</DFProperties>
+				
+				<Node>
+					<NodeName>CreationDate</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>ExpirationDate</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>TypeOfSubscription</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<!-- SubscriptionParameters: UsageLimits node -->
+				<Node>
+					<NodeName>UsageLimits</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName>DataLimit</NodeName>
+						<!-- Status: Optional -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><int/></DFFormat>
+							<Scope><Permanent/></Scope>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>StartDate</NodeName>
+						<!-- Status: Optional -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<Occurrence><ZeroOrOne/></Occurrence>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>TimeLimit</NodeName>
+						<!-- Status: Optional -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><int/></DFFormat>
+							<Occurrence><ZeroOrOne/></Occurrence>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>UsageTimePeriod</NodeName>
+						<!-- Status: Optional -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><int/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+				</Node><!-- End of UsageLimits node -->			
+			</Node><!-- End of SubscriptionParameters node -->
+			
+
+			<!-- ***** Credential ***** node -->	
+			<Node>
+				<NodeName>Credential</NodeName>
+				<!-- Status: Required -->
+				<DFProperties>
+					<AccessType><Get/><Replace/></AccessType>
+					<DFFormat><node/></DFFormat>
+					<DFType><DDFName></DDFName></DFType>
+				</DFProperties>
+				
+				<Node>
+					<NodeName>CreationDate</NodeName>
+					<!-- Status: Optional -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<Node>
+					<NodeName>ExpirationDate</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>	
+				
+				<!-- Credential: UsernamePassword node -->
+				<Node>
+					<NodeName>UsernamePassword</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName>Username</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>Password</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Replace/></AccessType>
+							<DFFormat><b64/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>MachineManaged</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><bool/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>SoftTokenApp</NodeName>
+						<!-- Status: Optional -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<Occurrence><ZeroOrOne/></Occurrence>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>AbleToShare</NodeName>
+						<!-- Status: Optional -->
+						<DFProperties>
+							<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+							<DFFormat><bool/></DFFormat>
+							<Occurrence><ZeroOrOne/></Occurrence>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>EAPMethod</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><node/></DFFormat>
+							<DFType><DDFName></DDFName></DFType>
+						</DFProperties>
+						
+						<Node>
+							<NodeName>EAPType</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>VendorId</NodeName>
+							<!-- Status: Optional -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>VendorType</NodeName>
+							<!-- Status: Optional -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>InnerEAPType</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>InnerVendorId</NodeName>
+							<!-- Status: Optional -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>InnerVendorType</NodeName>
+							<!-- Status: Optional -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><int/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+						<Node>
+							<NodeName>InnerMethod</NodeName>
+							<!-- Status: Required -->
+							<DFProperties>
+								<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+								<DFFormat><chr/></DFFormat>
+								<Occurrence><ZeroOrOne/></Occurrence>
+								<DFType><MIME>text/plain</MIME></DFType>
+							</DFProperties>
+						</Node>
+						
+					</Node><!-- End of EAPMethod node -->					
+				</Node><!-- End of UsernamePassword node -->
+
+				<!-- Credential: DigitalCertificate node -->
+				<Node>
+					<NodeName>DigitalCertificate</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName>CertificateType</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>CertSHA256Fingerprint</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+				</Node><!-- End of DigitalCertificate node -->
+				
+				<Node>
+					<NodeName>Realm</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Get/><Replace/></AccessType>
+						<DFFormat><chr/></DFFormat>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+
+				<Node>
+					<NodeName>CheckAAAServerCertStatus</NodeName>
+					<!-- Status: Required -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><bool/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><MIME>text/plain</MIME></DFType>
+					</DFProperties>
+				</Node>
+				
+				<!-- Credential: SIM node -->
+				<Node>
+					<NodeName>SIM</NodeName>
+					<!-- Status: Required for clients possessing a (U)SIM card; otherwise Optional -->
+					<DFProperties>
+						<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+						<DFFormat><node/></DFFormat>
+						<Occurrence><ZeroOrOne/></Occurrence>
+						<DFType><DDFName></DDFName></DFType>
+					</DFProperties>
+					
+					<Node>
+						<NodeName>IMSI</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><chr/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+					<Node>
+						<NodeName>EAPType</NodeName>
+						<!-- Status: Required -->
+						<DFProperties>
+							<AccessType><Get/><Replace/></AccessType>
+							<DFFormat><int/></DFFormat>
+							<DFType><MIME>text/plain</MIME></DFType>
+						</DFProperties>
+					</Node>
+					
+				</Node><!-- End of SIM node -->	
+				
+			</Node><!-- End of Credential node -->
+					
+			<!-- ***** Extension ***** node -->	
+			<Node>
+				<NodeName>Extension</NodeName>
+				<!-- Status: Optional -->
+				<DFProperties>
+					<AccessType><Add/><Delete/><Get/><Replace/></AccessType>
+					<DFFormat><node/></DFFormat>
+					<Occurrence><ZeroOrOne/></Occurrence>
+					<DFType><DDFName></DDFName></DFType>
+				</DFProperties>
+			</Node><!-- End of Extension node -->
+			
+		</Node><!-- End of the dynamic node to facilitate more than 1 credential for a given provider -->
+		
+	</Node><!-- End of the PerProviderSubscription node -->
+	
+</MgmtTree>

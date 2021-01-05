@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+	Hotspot 2.0 Passpoint Registration Protocol (PRP)
+
+	This document is the XML schema for Registration  Protocol, part of the Wi-Fi Alliance Wi-Fi CERTIFIED Passpoint(tm) program, 
+	a solution for next generation Wi-Fi(R) hotspots. 
+
+	WI-FI ALLIANCE PROPRIETARY - SUBJECT TO CHANGE WITHOUT NOTICE
+	
+	This document may be used with the permission of Wi-Fi Alliance under the terms set forth herein.  
+	
+	By your use of the document, you are agreeing to these terms. 
+	
+	Unless this document is clearly designated as an approved specification, this document is a work in process and is not an approved Wi-Fi Alliance specification. 
+	
+	This document is subject to revision or removal at any time without notice.  
+	Information contained in this document may be used at your sole risk.  
+	Wi-Fi Alliance assumes no responsibility for errors or omissions in this document.
+	
+	This copyright permission does not constitute an endorsement of the products or services.  
+	Wi-Fi Alliance trademarks and certification marks may not be used unless specifically allowed by Wi-Fi Alliance.
+	
+	Wi-Fi Alliance has not conducted an independent intellectual property rights ("IPR") review of this document and the information contained herein, 
+	and makes no representations or warranties regarding IPR, including without limitation patents, copyrights or trade secret rights. 
+	This document may contain inventions for which you must obtain licenses from third parties before making, using or selling the inventions. 
+	
+	Wi-Fi Alliance owns the copyright in this document and reserves all rights therein.  
+	A user of this document may duplicate and distribute copies of the document in connection with the authorized uses described herein, 
+	provided any duplication in whole or in part includes the copyright notice and the disclaimer text set forth herein.  
+	Wi-Fi Alliance hereby grants a user of the XML schema file(s) of this document a royalty-free, perpetual, 
+	irrevocable copyright license to use and distribute solely the XML schema file(s) found within this document. 
+	
+	Unless prior written permission has been received from Wi-Fi Alliance, any other use of this document and all other duplication and distribution of this document are prohibited.  
+	Unauthorized use, duplication, or distribution is an infringement of Wi-Fi Alliance's copyright.
+	
+	NO REPRESENTATIONS OR WARRANTIES (WHETHER EXPRESS OR IMPLIED) ARE MADE BY WI-FI ALLIANCE AND WI-FI ALLIANCE IS NOT LIABLE FOR AND HEREBY DISCLAIMS 
+	ANY DIRECT, INDIRECT, PUNITIVE, SPECIAL, INCIDENTAL, CONSEQUENTIAL, OR EXEMPLARY DAMAGES ARISING OUT OF OR IN CONNECTION WITH THE USE OF THIS DOCUMENT AND ANY INFORMATION CONTAINED IN THIS DOCUMENT.
+	
+	(C) 2014 Wi-Fi Alliance.  All Rights Reserved.
+	
+		Revision History
+		Revision	Date				Comments
+		1.0			April 29, 2014		Release version 1.0 based on Hotspot 2.0 Release 2 Specification, v1.0 and Test Plan, v1.0
+											
+-->
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns="http://www.wi-fi.org/specifications/hotspot2dot0/v1.0/rep"
+    targetNamespace="http://www.wi-fi.org/specifications/hotspot2dot0/v1.0/rep"
+    elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xs:element name="RegistrationProtocol">
+        <xs:complexType>
+            <xs:choice minOccurs="1">
+                <xs:group ref="ServerGroup"/>
+                <xs:group ref="ClientGroup"/>
+                <xs:group ref="StatusGroup"/>
+            </xs:choice>
+            <xs:attribute name="repVersion" use="required" type="repVersionType"> </xs:attribute>
+            <xs:anyAttribute namespace="##other"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="ServerGroup">
+        <xs:annotation>
+            <xs:documentation>This group is sent from the OSU server to the mobile device.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="repSupportedVersions" type="repVersionList"/>
+            <xs:element minOccurs="0" name="LoginCouponOption">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element default="Coupon" name="CouponFieldLabel" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LoginUsernameOption">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element default="Username" minOccurs="0" name="UsernameFieldLabel"
+                            type="xs:string"/>
+                        <xs:element default="Password" minOccurs="0" name="PasswordFieldLabel"
+                            type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="SubscriptionPlans">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="SubscriptionPlanIntro" type="xs:string"/>
+                        <xs:element maxOccurs="6" minOccurs="0" name="SubscriptionPlanOption">
+                            <xs:complexType>
+                                <xs:simpleContent>
+                                    <xs:extension base="xs:string">
+                                        <xs:attribute name="PlanID" type="xs:integer" use="required"
+                                        />
+                                    </xs:extension>
+                                </xs:simpleContent>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="BillingOptions">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element maxOccurs="4" name="CardProviderChoice" type="CardType"
+                            minOccurs="0"/>
+                        <xs:element maxOccurs="2" minOccurs="0" name="WebPaymentChoice"
+                            type="WebPaymentType"/>
+                        <xs:element maxOccurs="unbounded" minOccurs="0" name="SPPaymentChoice">
+                            <xs:annotation>
+                                <xs:documentation/>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:attribute name="MCC">
+                                    <xs:annotation>
+                                        <xs:documentation>Mobile Country Code</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                            <xs:pattern value=""/>
+                                            <xs:pattern value="[0-9]{3}"/>
+                                            <xs:whiteSpace value="replace"/>
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                                <xs:attribute name="MNC">
+                                    <xs:annotation>
+                                        <xs:documentation>Mobile Network Code</xs:documentation>
+                                    </xs:annotation>
+                                    <xs:simpleType>
+                                        <xs:restriction base="xs:string">
+                                            <xs:pattern value="[0-9]{2,3}"/>
+                                        </xs:restriction>
+                                    </xs:simpleType>
+                                </xs:attribute>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element minOccurs="1" name="IncludeEmailForReceipt" type="xs:boolean"/>
+                        <xs:element name="IncludePhoneNumber" type="xs:boolean"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="BillingRoomNumberOption">
+                <xs:complexType>
+                    <xs:attribute default="false" name="RequestLastName" type="xs:boolean"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="TermsAndConditions" type="xs:string"/>
+            <xs:element minOccurs="0" name="ServerExtensions">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="ClientGroup">
+        <xs:annotation>
+            <xs:documentation>This group is sent from the mobile device to the OSU server.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="0" name="LoginUsernameInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Username">
+                            <xs:annotation>
+                                <xs:documentation>The facets are stricter than required by RFC-5322 (note: XML metacharacters &amp; and &lt; are not permitted in userid); verifies NAI (userid@realm).</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:pattern
+                                        value="([a-zA-z0-9!#$%\+_~-]{1,}(\.[a-zA-z0-9!#$%\+_~-]{1,})?)+@[a-zA-Z0-9][a-zA-Z0-9-]{0,62}(\.[a-zA-Z0-9][a-zA-Z0-9-]{0,61})+"/>
+                                    <xs:maxLength value="253"/>
+                                    <xs:whiteSpace value="collapse"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="Password">
+                            <xs:annotation>
+                                <xs:documentation>Password must be at least 6 characters (8 base64-encoded digits) and at most 96 characters (128 base64-encoded digits).  No restrictions are placed on allowable characters.</xs:documentation>
+                            </xs:annotation>
+                            <xs:simpleType>
+                                <xs:restriction base="xs:base64Binary">
+                                    <xs:minLength value="8"/>
+                                    <xs:whiteSpace value="collapse"/>
+                                    <xs:pattern value=""/>
+                                    <xs:maxLength value="128"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="LoginCouponInfo" type="xs:base64Binary"/>
+            <xs:element minOccurs="0" name="SubscriptionPlanSelection">
+                <xs:complexType>
+                    <xs:attribute name="PlanID">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:integer"> </xs:restriction>
+                        </xs:simpleType>
+                    </xs:attribute>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="BillingInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:choice>
+                            <xs:element name="CreditCard">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="CardProvider" type="CardType"> </xs:element>
+                                        <xs:element name="CardHolderName" type="xs:string"/>
+                                        <xs:element name="CardNumber">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:string">
+                                                  <xs:pattern value="[0-9]{15,16}"/>
+                                                  <xs:whiteSpace value="collapse"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                        <xs:element name="CardExpirationDate" type="xs:gYearMonth"/>
+                                        <xs:element name="CardSecurityCode">
+                                            <xs:simpleType>
+                                                <xs:restriction base="xs:decimal">
+                                                  <xs:minInclusive value="0"/>
+                                                  <xs:maxInclusive value="9999"/>
+                                                </xs:restriction>
+                                            </xs:simpleType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="WebPayment">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="WebProvider" type="WebPaymentType"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element minOccurs="1" name="SPPayment-MSISDN" type="PhoneNumberType"
+                            />
+                        </xs:choice>
+                        <xs:element name="FirstName" type="xs:string"/>
+                        <xs:element name="LastName" type="xs:string"/>
+                        <xs:element name="Address1" type="xs:string"/>
+                        <xs:element name="Address2" type="xs:string" minOccurs="0"/>
+                        <xs:element name="City" type="xs:string"/>
+                        <xs:element name="PostalCode" type="xs:string"/>
+                        <xs:element name="Country" type="xs:string"/>
+                        <xs:element name="EmailAddress">
+                            <xs:simpleType>
+                                <xs:restriction base="xs:string">
+                                    <xs:whiteSpace value="collapse"/>
+                                </xs:restriction>
+                            </xs:simpleType>
+                        </xs:element>
+                        <xs:element name="PhoneNumber" type="PhoneNumberType"> </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="BillingHotelRoomInfo">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="RoomNumber"/>
+                        <xs:element minOccurs="0" name="CustomerLastName" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element default="false" minOccurs="0" name="TermsAndConditionsAccept"
+                type="xs:boolean"/>
+            <xs:element minOccurs="0" name="ClientExtensions">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:any maxOccurs="unbounded" minOccurs="0" namespace="##other"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="StatusGroup">
+        <xs:annotation>
+            <xs:documentation>This group can be sent from either the mobile device or the server.  When sent, it replaces either the ServerGroup or the ClientGroup.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element minOccurs="1" name="StatusCode">
+                <xs:simpleType>
+                    <xs:restriction base="xs:integer">
+                        <xs:minInclusive value="0"/>
+                        <xs:maxInclusive value="13"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element minOccurs="0" name="StatusCodeText">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:maxLength value="255"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:simpleType name="CardType">
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:enumeration value="Visa"/>
+            <xs:enumeration value="MasterCard"/>
+            <xs:enumeration value="American Express"/>
+            <xs:enumeration value="Discover"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="WebPaymentType">
+        <xs:restriction base="xs:string">
+            <xs:whiteSpace value="collapse"/>
+            <xs:enumeration value="PayPal"/>
+            <xs:enumeration value="Skype Credit"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PhoneNumberType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\+?[0-9()\s-]{4,20}"/>
+            <xs:whiteSpace value="collapse"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="repVersionList">
+        <xs:list itemType="repVersionType"/>
+    </xs:simpleType>
+    <xs:simpleType name="repVersionType">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="\d\.\d{1,2}"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
